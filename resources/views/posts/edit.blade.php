@@ -21,7 +21,7 @@
 
                     <div class="card-body p-4">
 
-                        <form method="POST" action="{{ route('posts.update', 1) }}">
+                        <form method="POST" action="{{ route('posts.update', $post->id) }}">
                             @csrf
                             @method('PUT')
                             <div class="mb-4">
@@ -29,8 +29,8 @@
                                     Post Title
                                 </label>
 
-                                <input type="text" name="title" class="form-control form-control-lg"
-                                    placeholder="Enter post title">
+                                <input value="{{ $post->title }}" type="text" name="title"
+                                    class="form-control form-control-lg" placeholder="Enter post title">
                             </div>
 
                             <div class="mb-4">
@@ -38,7 +38,7 @@
                                     Description
                                 </label>
 
-                                <textarea name="description" class="form-control" rows="5" placeholder="Write post description"></textarea>
+                                <textarea name="description" class="form-control" rows="5" placeholder="Write post description">{{ $post->desc }}</textarea>
                             </div>
 
                             <div class="mb-4">
@@ -47,27 +47,12 @@
                                 </label>
 
                                 <select name="posted_by" class="form-select">
-
-                                    <option selected disabled>
-                                        Select Creator
-                                    </option>
-
-                                    <option value="Ahmed">
-                                        Ahmed
-                                    </option>
-
-                                    <option value="Mohamed">
-                                        Mohamed
-                                    </option>
-
-                                    <option value="Sofian">
-                                        Sofian
-                                    </option>
-
-                                    <option value="Adam">
-                                        Adam
-                                    </option>
-
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}"
+                                            {{ $user->id == $post->posted_by ? 'selected' : '' }}>
+                                            {{ $user->name }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
 

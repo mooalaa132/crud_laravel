@@ -1,29 +1,6 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">
-                Learn Laravel
-            </a>
-
-            <a class="btn btn-outline-light"
-               href="{{ route('posts.index') }}">
-                ← All Posts
-            </a>
-        </div>
-    </nav>
-
-    <div class="container py-5">
+@extends("layout.app")  
+@section('title')Post @endsection
+@section("content")
 
         <div class="row justify-content-center">
 
@@ -39,11 +16,11 @@
                     <div class="card-body p-4">
 
                         <h2 class="fw-bold mb-3">
-                            {{ $post['title'] }}
+                            {{ $post->title }}
                         </h2>
 
                         <p class="text-muted fs-5">
-                            {{ $post['description'] }}
+                            {{ $post->desc }}
                         </p>
 
                     </div>
@@ -61,11 +38,11 @@
 
                         <div class="row mb-3">
                             <div class="col-md-4 fw-bold">
-                                Name
+                                Name :
                             </div>
 
                             <div class="col-md-8">
-                                {{ $post['posted_by'] }}
+                                {{ $post->create_by }}
                             </div>
                         </div>
 
@@ -89,7 +66,7 @@
                             </div>
 
                             <div class="col-md-8">
-                                2025-02-01
+                                {{ $post->created_at }}
                             </div>
                         </div>
 
@@ -100,5 +77,4 @@
             </div>
 
         </div>
-
-
+        @endsection
